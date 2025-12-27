@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width-device-width, initial-scale=1.0">
+    <title>SecureCloud</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="main">
+        <!-- Authentication (Login/Register) -->
+        <section id="auth-section">
+            <h1>SecureCloud Vault</h1>
+            <div class-"tabs">
+                <button onclick="showTab('login')">Login</button>
+                <button onclick="showTab('register')">Register</button>
+            </div>
+
+            <form id="register-form" style="display: none;">
+                <h2>Create Acoount</h2>
+                <input type=""text" id="reg-username" placeholder="Username" required>
+                <input type="email" id="reg-email" placeholder="Email" required>
+                <input type="password" id="reg-password" placeholder="Password" required>
+                <p class=""note">Note: RSA-4090 keys will be generated locally.</p>
+                <button type="submit">register & Generate Keys</button>
+            </form>
+
+            <form id="login-form">
+                <h2>Login</h2>
+                <input type="text" id="login-username" placeholder="Username" required>
+                <input type="password" id="login-password" placeholder="Password" required>
+                <input type="text" id="login-otp" placeholder="6-Digit OTP Code" maxlength="6">
+                <button type="submit">Unlock Vault</button>
+            </form>
+        </section>
+
+        <!-- 2FA Setup (Shown after registeration)-->
+         <section id="tfa-section" style="display: none;">
+            <h2>Setup Two-Factor Authentication</h2>
+            <p>Scan this URI in Google Authenticator or enter the secret manually:</p>
+            <div id="tfa-details">
+                <code id="tfa-secret"></code>
+            </div>
+            <button onclick=""location.reload()">I've saved my secret. Go to login.</button>"
+         </section>
+
+         <!-- File Dashboard (Shown after JWT Login)-->
+          <section id="dashboard-section" style="display: none;">
+            <header>
+                <h2>Your Secure Files</h2>
+                <button id="logout-btn">Logout</button>
+            </header>
+
+            <div id="upload-container">
+                <input type="file" id="file-input">
+                <button id="upload-btn">Encrypt & Upload</button>
+            </div>
+
+            <table id="files-table">
+                <thead>
+                    <tr>
+                        <th>Filename (Encrypted)</th>
+                        <th>Upload Date</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="files-list">
+                    <!-- files will be injected here by main.js-->
+                </tbody>
+            </table>
+          </section>
+    </div>
+    <!-- Script Loading: Load Crypto first, then main logic -->
+     <script src="js/utils.js"></script>
+     <script src="js/crypto.js"></script>
+     <script src="js/app.js"></script>
+</body>
+</html>
