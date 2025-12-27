@@ -6,13 +6,16 @@ from database import close_db
 from extensions import jwt
 from files import files
 from datetime import timedelta
+from flask_cors import CORS
 import os
-import sqlite3
-import pyotp
+
 
 
 def create_app():
     app = Flask(__name__)
+
+    # Enabling CORS for all routes and allow custom headers we created
+    CORS(app, expose_headers=["X-Wrapped-Key", "X-IV", "X-Filename-Enc"])
 
     # Loads DATABASE_PATH from .env 
     app.config.from_prefixed_env()
@@ -37,6 +40,8 @@ def create_app():
 
     # Access token Expiration
     app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(hours=1)
+
+    
 
     
     return app
