@@ -1,0 +1,14 @@
+# Python environment
+venv/
+env/
+__pycache__/
+*.pyc
+
+# Local Database
+*.db
+
+# Secrets and Config
+.env
+
+# Uploaded Files (Phase 1, Step 4)
+uploads/
